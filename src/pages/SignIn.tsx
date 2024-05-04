@@ -1,6 +1,7 @@
 import { ReactElement } from "react";
 import { useForm, FormProvider, SubmitHandler } from "react-hook-form";
 import { useNavigate } from "react-router";
+import { toast } from "react-toastify";
 
 // Define the data structure for the form
 interface SignInFormData {
@@ -18,8 +19,15 @@ function SignIn(): ReactElement {
   // Define the form submission handler
   const onSubmit: SubmitHandler<SignInFormData> = (data) => {
     console.log("Form submitted with data:", data);
-    navigate("/home-page");
-    // Add additional form submission logic here, like an API call
+    navigate("/home-page"); // Navigate to the homepage on successful submission
+    toast.success("Sign In successful.", {containerId: "toast-container-message"}); // Show success toast on form submission
+  };
+
+  // Define the onClick handler for the submit button
+  const handleButtonClick = () => {
+    toast.info("Submit button clicked.", {containerId: "toast-container-message"}); // Toast message upon button click
+    console.log("Button clicked on");
+    
   };
 
   return (
@@ -70,7 +78,11 @@ function SignIn(): ReactElement {
 
             {/* Submit button */}
             <div>
-              <button type="submit" id="submit-button">
+              <button
+                type="submit"
+                id="submit-button"
+                onClick={handleButtonClick} // Click handler for the button
+              >
                 Submit
               </button>
             </div>
