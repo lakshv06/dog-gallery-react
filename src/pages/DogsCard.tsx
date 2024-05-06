@@ -10,7 +10,7 @@ function DogsCard({ dogBreed }: DogBreedPageProps): ReactElement {
   const [dogImageData, setDogImageData] = useState<string | null>(null);
   const [subBreedListData, setSubBreedListData] = useState<string[] | null>(null);
   const [showDogCardModal, setShowDogCardModal] = useState<boolean>(false);
-  const [pickSubBreedName, setPickSubBreedName] = useState<string>("");
+  const [pickSubBreedName, setPickSubBreedName] = useState<string[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -42,8 +42,9 @@ function DogsCard({ dogBreed }: DogBreedPageProps): ReactElement {
       if (response.data.status === "success") {
         setSubBreedListData(response.data.message);
         if (response.data.message.length > 0) {
-          const randomIndex = Math.floor(Math.random() * response.data.message.length);
-          setPickSubBreedName(response.data.message[randomIndex]); // Pick a random sub-breed
+          setPickSubBreedName(response.data.message); // Pick a random sub-breed
+          console.log("Selected sub breed: ", response.data.message);
+
         }
       } else {
         console.error("Failed to fetch sub-breed list");
@@ -83,6 +84,8 @@ function DogsCard({ dogBreed }: DogBreedPageProps): ReactElement {
         <DialogBoxModal
           showModal={showDogCardModal}
           setModal={setShowDogCardModal} // Pass the setModal function to close the modal
+          pickedDogBreed={dogBreed}
+          pickedSubBreed={pickSubBreedName}
         />
       )}
     </div>

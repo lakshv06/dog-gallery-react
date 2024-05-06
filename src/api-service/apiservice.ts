@@ -1,8 +1,6 @@
 import axios, { AxiosResponse } from "axios";
-import environmentData from  "../environment-constant";
-import {
- 
-} from "../interfaces/global.interfaces";
+import environmentData from "../environment-constant";
+import {} from "../interfaces/global.interfaces";
 
 class dogsAPI {
   endpoints: { [key: string]: string };
@@ -12,7 +10,7 @@ class dogsAPI {
   constructor() {
     this.endpoints = {
       get_all_dogs: "https://dog.ceo/api/breeds/list/all",
-      get_dog_breed_random_image: "https://dog.ceo/api/breed"
+      get_dog_breed_random_image: "https://dog.ceo/api/breed",
     };
 
     this.base_url = `${environmentData.url}`;
@@ -27,13 +25,37 @@ class dogsAPI {
     return axios.get(this.endpoints.get_all_dogs);
   };
 
-  getDogBreedRandomImage = async(breedName: string): Promise<AxiosResponse>=>{
-    return axios.get(`${this.endpoints.get_dog_breed_random_image}/${breedName}/images/random`);
-  }
+  getDogBreedRandomImage = async (
+    breedName: string
+  ): Promise<AxiosResponse> => {
+    return axios.get(
+      `${this.endpoints.get_dog_breed_random_image}/${breedName}/images/random`
+    );
+  };
 
-  getAllSubBreedList = async(breedName: string): Promise<AxiosResponse>=>{
-    return axios.get(`${this.endpoints.get_dog_breed_random_image}/${breedName}/list`);
-  }
+  getAllSubBreedList = async (breedName: string): Promise<AxiosResponse> => {
+    return axios.get(
+      `${this.endpoints.get_dog_breed_random_image}/${breedName}/list`
+    );
+  };
+
+  getSubBreedRandomImageUrl = async (
+    breedName: string,
+    subBreedName: string
+  ): Promise<AxiosResponse> => {
+    return axios.get(
+      `${this.endpoints.get_dog_breed_random_image}/${breedName}/${subBreedName}/images/random`
+    );
+  };
+
+  getBreedRandomImage = async (
+    breedName: string,
+    count: number
+  ): Promise<AxiosResponse> => {
+    return axios.get(
+      `${this.endpoints.get_dog_breed_random_image}/${breedName}/images/random/${count}`
+    );
+  };
 }
 const apiService = new dogsAPI();
 
