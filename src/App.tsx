@@ -14,7 +14,7 @@ function App(): ReactElement {
         {/* ParentRoute with an Outlet for child components */}
         <Route path="/" element={<ParentRoute />}>
           {/* Index route for the SignIn component */}
-          <Route index element={<SignIn />} />
+          <Route index element={<HomePage />} />
         </Route>
         <Route path='home-page' element={<HomePage/>}>
 
